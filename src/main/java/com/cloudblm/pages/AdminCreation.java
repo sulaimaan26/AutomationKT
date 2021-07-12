@@ -6,8 +6,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.cloudblm.sections.HeaderSection;
+import com.cloudblm.sections.SideMenu;
+
 public class AdminCreation {
 	WebDriver driver;
+	HeaderSection header;
+	SideMenu sidemenu;
 
 	public AdminCreation(WebDriver driver) {
 		PageFactory.initElements(driver, this);
@@ -15,134 +20,121 @@ public class AdminCreation {
 
 	}
 
-	// CreateButton
 	@FindBy(xpath = "//button[text()='Create']")
 	public WebElement CreateButton;
 
-	// EnterFirstName
 	@FindBy(xpath = "//input[@formcontrolname='FirstName']")
 	public WebElement FirstName;
 
-	// EnterLastName
 	@FindBy(xpath = "//input[@formcontrolname='LastName']")
 	public WebElement LastName;
 
-	// EnterEmail
 	@FindBy(xpath = "//input[@formcontrolname='EmailID']")
 	public WebElement Email;
 
-	// EnterTitle
 	@FindBy(xpath = "//input[@formcontrolname='Title']")
 	public WebElement Title;
 
-	// EnterContact
 	@FindBy(xpath = "//input[@formcontrolname='Contact']")
 	public WebElement Contact;
 
-	// SelectPhoneCode
 	@FindBy(id = "phoneCode")
 	public WebElement SelectPhoneCode;
 
-	// EnterCode
 	@FindBy(xpath = "//div[@id='phoneCode']//input[1]")
 	public WebElement EnterCode;
 
-	// EnterAddress
 	@FindBy(xpath = "//input[@formcontrolname='Address']")
 	public WebElement Address;
 
-	// AdmintypeDropdown
 	@FindBy(id = "admintypeDropdown")
 	public WebElement SelectAdmintype;
 
-	// EnterAdminType
 	@FindBy(xpath = "(//div[@id ='admintypeDropdown']//following::input[1])[1]")
 	public WebElement EnterAdminType;
 
-	// SelectCountry
 	@FindBy(xpath = "(//div[contains(@id,'multiple-dropdown')])[1]")
 	public WebElement SelectCountry;
 
-	// EnterCountry
 	@FindBy(xpath = "((//div[contains(@id,'multiple-dropdown')])[1]//following::input[1])[1]")
 	public WebElement EnterCountry;
 
-	// SelectState
 	@FindBy(xpath = "(//div[contains(@id,'multiple-dropdown')])[3]")
 	public WebElement SelectState;
 
-	// EnterState
 	@FindBy(xpath = "((//div[contains(@id,'multiple-dropdown')])[3]//following::input[1])[1]")
 	public WebElement EnterState;
 
-	// SelectCity
 	@FindBy(xpath = "(//div[contains(@id,'multiple-dropdown')])[2]")
 	public WebElement SelectCity;
 
-	// EnterCity
 	@FindBy(xpath = "((//div[contains(@id,'multiple-dropdown')])[2]//following::input[1])[1]")
 	public WebElement EnterCity;
+	
+	@FindBy(xpath = "//span[@class=\"invalid-error-text\"][1]")
+	public WebElement FirstNameFieldValidation;
+	
 
 	public void Click_CreateButton() {
 		CreateButton.click();
 	}
 
-	public void Enter_FirstName(String firstname) {
+	public void EnterFirstName(String firstname) {
 		FirstName.sendKeys(firstname);
 	}
 
-	public void Clear_FirstName() {
+	public void ClearFirstName() {
 		FirstName.clear();
 	}
 
-	public void Enter_LastName(String lastname) {
+	public void EnterLastName(String lastname) {
 		LastName.sendKeys(lastname);
 	}
 
-	public void Clear_LastName() {
+	public void ClearLastName() {
 		LastName.clear();
 	}
 
-	public void Enter_Email(String email) {
+	public void EnterEmail(String email) {
 		Email.sendKeys(email);
 	}
 
-	public void Clear_Email() {
+	public void ClearEmail() {
 		Email.clear();
 	}
 
-	public void Enter_Title(String title) {
+	public void EnterTitle(String title) {
 		Title.sendKeys(title);
 	}
 
-	public void Clear_Title() {
+	public void ClearTitle() {
 		Title.clear();
 	}
 
-	public void Enter_Contact(String contact) {
+	public void EnterContact(String contact) {
 		Contact.sendKeys(contact);
 	}
 
-	public void Clear_Contact() {
+	public void ClearContact() {
 		Contact.clear();
 	}
 
-	public void Select_Code(String code) {
+	public void SelectCode(String code) {
 		SelectPhoneCode.click();
 		EnterCode.sendKeys(code);
 		driver.findElement(By.xpath("//label[text()='" + code + "']")).click();
 	}
 
-	public void Select_AdminType(String Type) {
+	public void SelectAdminType(String Type) {
 		SelectAdmintype.click();
 		driver.findElement(By.xpath("//label[text()='" + Type + "']")).click();
 	}
 
-	public void Enter_Address(String address) {
+	public void EnterAddress(String address) {
 		Address.sendKeys(address);
 	}
 
-	public void Clear_Address() {
+	public void ClearAddress() {
 		Address.clear();
 	}
 
@@ -165,5 +157,14 @@ public class AdminCreation {
 		EnterCity.sendKeys(city);
 		driver.findElement(By.xpath("//label[contains(text(),'" + city + "')]/..")).click();
 
+	}
+	
+	public AdminDashboardPage clickCreateButton() {
+		header.CreateButton.click();
+		return new AdminDashboardPage(driver);
+	}
+	
+	public String getFirstNameValidationMsg() {
+		return FirstNameFieldValidation.getText();
 	}
 }

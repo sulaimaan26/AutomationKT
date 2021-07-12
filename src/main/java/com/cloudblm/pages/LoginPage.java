@@ -8,7 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import com.cloudblm.util.HandleTimeout;
 
 public class LoginPage {
-	HandleTimeout customtimeout;	
+	HandleTimeout customtimeout;
+	WebDriver driver;
 	
 	@FindBy(id="username")
 	WebElement EmailIDField;
@@ -22,6 +23,7 @@ public class LoginPage {
 	public LoginPage(WebDriver driver){
 		PageFactory.initElements(driver, this);
 		customtimeout = new HandleTimeout(driver);
+		this.driver = driver;
 	}
 	
 	public void enterEmail(String Email) {
@@ -54,9 +56,10 @@ public class LoginPage {
 		return PasswordField.getText();
 	}
 	
-	public void signin() {
+	public ProjectDashboardPage signin() {
 		customtimeout.WaitUntil(SignInbutton);
 		SignInbutton.click();
+		return new ProjectDashboardPage(driver);
 	}
 
 }
