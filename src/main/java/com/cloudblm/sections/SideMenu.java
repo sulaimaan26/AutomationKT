@@ -7,14 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 import com.cloudblm.pages.AdminDashboardPage;
 import com.cloudblm.pages.ProjectDashboardPage;
+import com.cloudblm.util.HandleTimeout;
 
 public class SideMenu {
 	WebDriver driver;
 	HeaderSection header;
+	HandleTimeout customtime;
 	
 	public SideMenu(WebDriver driver){
 		PageFactory.initElements(driver, this);
 		driver = this.driver;
+		//customtime = new HandleTimeout(driver);
 		header = new HeaderSection(driver);
 	}
 	
@@ -40,6 +43,7 @@ public class SideMenu {
 	}
 	
 	public AdminDashboardPage gotoAdmin() {
+		//customtime.WaitUntil(AdminMenu);
 		AdminMenu.click();
 //		try {
 //			while(true) {

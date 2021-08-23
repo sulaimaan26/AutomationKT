@@ -1,18 +1,21 @@
 package com.cloudblm.testdata;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.testng.annotations.DataProvider;
+
+import com.cloudblm.util.ExcelInputs;
 
 public class TestDataAdminCreation {
 	
 	
 	@DataProvider(name = "FirstNameFieldInvalid")
 	public Object FirstNameFieldInvalid() {
-		return new Object[][]{
-			{"@@@","Please enter valid First Name"},
-			{"$%^^","Please enter valid First Name"},
-			{"aa","First Name should be 3 to 30 characters"},
-			{"aassssssssssssssssssssssssssssssssssssssss","First Name should be 3 to 30 characters"}
-		};
+		
+		List<Object[]> testdata = ExcelInputs.getdatafrmexcel();		
+		return ExcelInputs.getTestDatabasedonID(5, testdata).iterator();
 	}
 
 }
